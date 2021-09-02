@@ -3,6 +3,6 @@
   "workspaces": [
     "server",
     "workspace-WebApp",
-    "Modules"
+    "workspace-modules"
   ]
 }
