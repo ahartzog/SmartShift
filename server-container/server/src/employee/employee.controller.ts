@@ -8,7 +8,6 @@ export class EmployeeController {
 
   @Get('getAllEmployees')
   async getAllEmployees(): Promise<Employee[]> {
-    const test = 5;
     const employees = await this.employeeService.findAll();
     return employees;
   }
@@ -22,6 +21,12 @@ export class EmployeeController {
   getGoodbye(): string {
     return "You can't fire me, I QUIT!";
   }
+
+  // @Get('getEmployee')
+  // async getEmployee(employeeId: ObjectId): Promise<string> {
+  //   const employee = await this.employeeService.find();
+  //   return 'Hello I am an employee, how can I help you?';
+  // }
 
   @Get('addAlekAgain')
   async addAlekAgain(): Promise<Employee> {
