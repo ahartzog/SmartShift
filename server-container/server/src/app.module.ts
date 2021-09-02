@@ -19,12 +19,14 @@ import { EmployeeModule } from './employee/employee.module';
       url: 'mongodb+srv://root:alllowercasepassword@cluster0.9kvv5.mongodb.net',
       useNewUrlParser: true,
       ssl: true,
+      retryAttempts: 3,
+      autoLoadEntities: true,
       entities: [Employee],
       synchronize: true,
     }),
     EmployeeModule,
   ],
-  controllers: [AppController, EmployeeController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

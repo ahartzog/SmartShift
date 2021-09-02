@@ -1,17 +1,25 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from '../app.service';
+import { Employee } from './employee.entity';
+import { EmployeeService } from './employee.service';
 
 @Controller('/employee')
 export class EmployeeController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private employeeService: EmployeeService) {}
 
   @Get()
   getHello(): string {
-      return 'Hello I am an employee, how can I help you?';
+    return 'Hello I am an employee, how can I help you?';
   }
 
   @Get('getGoodbye')
   getGoodbye(): string {
-      return 'You can\'t fire me, I QUIT!';
+    return "You can't fire me, I QUIT!";
+  }
+
+  @Get('addAlekAgain')
+  async addAlekAgain(): Promise<Employee> {
+    const fullOne = await this.employeeService.addOneAlek();
+    console.log('fullone?', fullOne);
+    return fullOne;
   }
 }

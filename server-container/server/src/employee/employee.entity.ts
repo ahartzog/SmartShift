@@ -1,9 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn } from 'typeorm';
+//Note that we are using ObjectId from Mongo, NOT TypeOrm
+import { ObjectId } from 'mongodb';
 
 @Entity()
 export class Employee {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @ObjectIdColumn()
+  _id: ObjectId;
 
   @Column()
   firstName: string;
@@ -12,5 +14,5 @@ export class Employee {
   lastName: string;
 
   @Column()
-  emailAddress: boolean;
+  emailAddress: string;
 }
