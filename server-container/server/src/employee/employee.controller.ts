@@ -8,7 +8,7 @@ export class EmployeeController {
 
   @Get('getAllEmployees')
   async getAllEmployees(): Promise<Employee[]> {
-    var test = 5;
+    const test = 5;
     const employees = await this.employeeService.findAll();
     return employees;
   }

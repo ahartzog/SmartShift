@@ -1,7 +1,16 @@
 {
   "folders": [
     {
+      "name": "Workspace Root",
       "path": "."
+    },
+    {
+      "name": "Server",
+      "path": "./server-container/server"
+    },
+    {
+      "name": "ss-web-app",
+      "path": "ss-web-app"
     }
   ],
   "settings": {
