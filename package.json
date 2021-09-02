@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "workspaces": [
+    "workspace-Server",
+    "workspace-WebApp",
+    "workspace-Modules"
+  ]
+}
