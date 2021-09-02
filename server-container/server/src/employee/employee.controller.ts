@@ -6,6 +6,13 @@ import { EmployeeService } from './employee.service';
 export class EmployeeController {
   constructor(private employeeService: EmployeeService) {}
 
+  @Get('getAllEmployees')
+  async getAllEmployees(): Promise<Employee[]> {
+    var test = 5;
+    const employees = await this.employeeService.findAll();
+    return employees;
+  }
+
   @Get()
   getHello(): string {
     return 'Hello I am an employee, how can I help you?';

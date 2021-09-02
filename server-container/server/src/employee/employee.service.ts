@@ -24,7 +24,7 @@ export class EmployeeService {
   async addOneAlek(): Promise<any> {
     const newEmployee: Employee = {
       _id: new ObjectId(),
-      firstName: 'Alek',
+      firstName: 'Alek' + Math.floor(Math.random() * 5000),
       lastName: 'Hartzog',
       emailAddress: 'ahartzog@gmail.com',
     };
