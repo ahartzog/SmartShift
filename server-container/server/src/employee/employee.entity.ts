@@ -4,14 +4,21 @@ import { Entity, Column, ObjectIdColumn, ObjectID } from 'typeorm';
 @Entity()
 export class Employee {
   @ObjectIdColumn()
-  _id: ObjectID;
+  _id!: ObjectID;
 
   @Column()
-  firstName: string;
+  firstName!: string;
 
   @Column()
-  lastName: string;
+  lastName!: string;
 
   @Column()
-  emailAddress: string;
+  emailAddress!: string;
 }
+
+// export interface EmployeeBase {
+//   _id: ObjectID;
+//   firstName: string;
+//   lastName: string;
+//   emailAddress: string;
+// }
