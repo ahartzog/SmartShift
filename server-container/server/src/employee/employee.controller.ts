@@ -9,6 +9,8 @@ export class EmployeeController {
   @Get('getAllEmployees')
   async getAllEmployees(): Promise<Employee[]> {
     const employees = await this.employeeService.findAll();
+
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     return employees;
   }
 

@@ -11,11 +11,11 @@ const getEmployees = async () => {
     url: config.API_URL + 'employee/getAllEmployees',
     method: 'get',
   });
-  console.log('result?', result);
+  // console.log('result?', result);
 
   const allEmployees: Employee[] = result.data;
 
-  console.log('retval?', allEmployees);
+  // console.log('retval?', allEmployees);
 
   return allEmployees;
 };

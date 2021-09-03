@@ -19,7 +19,7 @@ const DisplayEmployees = ({ numberOfClients = null, ...props }: Props) => {
     return <div>Loading...</div>;
   }
 
-  if (!employeesData) {
+  if (!employeesData || employeesError) {
     return <div>Error loading employees data</div>;
   }
 
