@@ -1,27 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEmployees } from 'features/employees/employeeQueries';
 import { Employee } from '../../../../server-container/server/src/employee/employee.entity';
 import { Table } from 'antd';
+import { DependencyContext } from 'DependencyContext';
 import { ColumnsType } from 'antd/es/table';
 type Props = {
   numberOfClients?: number | null;
 };
 
 const DisplayEmployees = ({ numberOfClients = null, ...props }: Props) => {
-  const {
-    status: employeesStatus,
-    data: employeesData,
-    error: employeesError,
-    isFetching: employeesIsFetching,
-  } = useEmployees();
+  const dependencies = useContext(DependencyContext);
 
-  if (employeesIsFetching) {
-    return <div>Loading...</div>;
-  }
-
-  if (!employeesData || employeesError) {
-    return <div>Error loading employees data</div>;
-  }
+  const { data: employeesData } =
+    dependencies.services.apiService.useEmployees();
 
   const columns: ColumnsType<Employee> = [
     {
