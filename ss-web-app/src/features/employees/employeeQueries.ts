@@ -1,9 +1,9 @@
 import { config } from 'lib/config';
-import { useContext } from 'react';
+
 import { QueryKeys } from 'lib/api/queryKeys';
 
 //Need to go find the EMPLOYEE type from the server
-import { Employee } from '../../../../server-container/server/src/employee/employee.entity';
+import { Employee } from 'lib/types';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 

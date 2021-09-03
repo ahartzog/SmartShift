@@ -9,13 +9,9 @@ import {
 } from '@ant-design/icons';
 import { Button, Layout, Menu, message, Space } from 'antd';
 import { EmployeesPage } from 'pages/EmployeesPage';
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 
 //import { SendEmployeesToOptimizer } from 'features/employees/SendEmployeesToOptimizer';
-
-const SendEmployeesToOptimizer = lazy(
-  () => import('../features/employees/SendEmployeesToOptimizer')
-);
 
 const MainLayout = () => {
   const { Header, Content, Footer, Sider } = Layout;
@@ -91,6 +87,7 @@ const MainLayout = () => {
           <EmployeesPage />
         </Content>
       </Layout>
+      <Footer>Feet?</Footer>
     </Layout>
   );
 };

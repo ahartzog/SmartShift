@@ -1,14 +1,10 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useEmployees } from 'features/employees/employeeQueries';
 import { AimOutlined } from '@ant-design/icons';
 import { Button, notification } from 'antd';
-import Spinner from 'react-spinkit';
-const SendEmployeesToOptimizer = () => {
-  const {
-    data: employeesData,
 
-    isFetching: employeesIsFetching,
-  } = useEmployees();
+const SendEmployeesToOptimizer = () => {
+  const { data: employeesData } = useEmployees();
 
   return (
     <div>
