@@ -3,7 +3,7 @@ import { ColumnsType } from 'antd/es/table';
 import { DependencyContext } from 'DependencyContext';
 import React, { useContext } from 'react';
 
-import { Employee } from '../../../../server-container/server/src/employee/employee.entity';
+import { Employee } from 'lib/types';
 
 type Props = {
   numberOfClients?: number | null;
