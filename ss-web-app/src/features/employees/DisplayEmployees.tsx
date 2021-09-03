@@ -59,4 +59,4 @@ const DisplayEmployees = ({ numberOfClients = null, ...props }: Props) => {
   );
 };
 
-export { DisplayEmployees };
+export default DisplayEmployees;
