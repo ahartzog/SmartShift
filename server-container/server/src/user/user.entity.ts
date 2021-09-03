@@ -1,5 +1,6 @@
 import { Entity, Column, ObjectIdColumn, ObjectID } from 'typeorm';
 import { UserRoles } from 'lib/constants';
+
 @Entity()
 export class User {
   @ObjectIdColumn()
@@ -7,6 +8,9 @@ export class User {
 
   @Column()
   username!: string;
+
+  @Column()
+  password!: string;
 
   @Column()
   emailAddress!: string;
