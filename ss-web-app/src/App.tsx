@@ -2,8 +2,11 @@ import './App.css';
 import 'antd/dist/antd.css';
 
 import { Button, Layout, Menu } from 'antd';
-import React, { lazy, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
+import { apiService } from 'lib/api/apiService';
+import { DemoStore } from 'lib/stores/DemoStore';
 import { ErrorBoundary } from 'react-error-boundary';
+import Bugsnag from '@bugsnag/js';
 import {
   QueryClient,
   QueryClientProvider,
@@ -12,6 +15,19 @@ import {
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import MainLayout from './layout/MainLayout';
+import { BugSnagService } from 'lib/bugSnagService';
+
+interface Dependencies {
+  apiService: typeof apiService;
+  bugSnagService: BugSnagService;
+  stores: {
+    demoStore: DemoStore;
+  };
+}
+
+const BugSnagErrorBoundary =
+  //@ts-ignore
+  Bugsnag.getPlugin('react').createErrorBoundary(React);
 
 function App() {
   const queryClient = new QueryClient({
@@ -21,7 +37,25 @@ function App() {
       },
     },
   });
+
   const { reset } = useQueryErrorResetBoundary();
+
+  const [dependencies, setDependencies] = useState<Dependencies | null>(null);
+
+  //Initialize the API service
+  useEffect(() => {
+    setDependencies({
+      apiService,
+      bugSnagService: new BugSnagService(),
+      stores: {
+        demoStore: new DemoStore(),
+      },
+    });
+  }, []);
+
+  if (dependencies === null) {
+    return null;
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -34,8 +68,10 @@ function App() {
           </div>
         )}
       >
-        <MainLayout />
-        <ReactQueryDevtools />
+        <BugSnagErrorBoundary>
+          <MainLayout />
+          <ReactQueryDevtools />
+        </BugSnagErrorBoundary>
       </ErrorBoundary>
     </QueryClientProvider>
   );

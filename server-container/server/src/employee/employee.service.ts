@@ -2,11 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ObjectID } from 'typeorm';
 
-//Note that we are using ObjectId from Mongo, NOT TypeOrm
-import { ObjectId } from 'mongodb';
-
 import { Employee } from './Employee.entity';
-import { v4 as uuidv4 } from 'uuid';
+
 @Injectable()
 export class EmployeeService {
   constructor(
@@ -26,7 +23,7 @@ export class EmployeeService {
 
   async addOneAlek(): Promise<any> {
     const newEmployee: Employee = {
-      _id: new ObjectId(),
+      _id: new ObjectID(),
       firstName: 'Alek' + Math.floor(Math.random() * 5000),
       lastName: 'Hartzog',
       emailAddress: 'ahartzog@gmail.com',
