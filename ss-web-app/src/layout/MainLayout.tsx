@@ -10,10 +10,11 @@ import {
 import { Button, Layout, Menu, message, Space } from 'antd';
 import { EmployeesPage } from 'pages/EmployeesPage';
 import React from 'react';
-
+import Config from 'lib/config';
 //import { SendEmployeesToOptimizer } from 'features/employees/SendEmployeesToOptimizer';
 
 const MainLayout = () => {
+  console.log('config??', Config);
   const { Header, Content, Footer, Sider } = Layout;
   const { SubMenu } = Menu;
   return (

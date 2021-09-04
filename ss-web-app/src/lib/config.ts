@@ -9,4 +9,4 @@ const config = {
     process.env.REACT_APP_ALARM_FETCH_RESPONSE_MAX_TIME_MS,
 };
 
-export { config };
+export default config;

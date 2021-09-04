@@ -9,7 +9,6 @@ const SendEmployeesToOptimizer = () => {
 
   const employeesData = null;
 
-  console.log('dependancies?', dependencies);
   const { data: test, isFetching } =
     dependencies.services.apiService.useEmployees();
 

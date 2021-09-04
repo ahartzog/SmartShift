@@ -1,4 +1,4 @@
-import { config } from 'lib/config';
+import Config from 'lib/config';
 
 import { QueryKeys } from 'lib/api/queryKeys';
 
@@ -9,7 +9,7 @@ import { useQuery } from 'react-query';
 
 const getEmployees = async () => {
   const result = await axios({
-    url: config.API_URL + 'employee/getAllEmployees',
+    url: Config.API_URL + 'employee/getAllEmployees',
     method: 'get',
   });
   // console.log('result?', result);
