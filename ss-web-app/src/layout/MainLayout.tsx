@@ -7,8 +7,11 @@ import {
   StarTwoTone,
   UserOutlined,
 } from '@ant-design/icons';
+import { Switch, Route, Link } from 'react-router-dom';
+import { pageRoutes } from './routes';
 import { Button, Layout, Menu, message, Space } from 'antd';
 import { EmployeesPage } from 'pages/EmployeesPage';
+import { DisplayUsers } from 'features/users/DisplayUsers';
 import React from 'react';
 import Config from 'lib/config';
 //import { SendEmployeesToOptimizer } from 'features/employees/SendEmployeesToOptimizer';
@@ -23,9 +26,12 @@ const MainLayout = () => {
       <Header className='header'>
         <div className='logo' />
         <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['2']}>
-          <Menu.Item key='1'>Nav 1</Menu.Item>
-          <Menu.Item key='2'>Nav 2</Menu.Item>
-          <Menu.Item key='3'>Nav 3</Menu.Item>
+          <Menu.Item key='1'>
+            <Link to={pageRoutes.employees}>Employees</Link>
+          </Menu.Item>
+          <Menu.Item key='2'>
+            <Link to={pageRoutes.users}>Users</Link>
+          </Menu.Item>
         </Menu>
       </Header>
       <Layout>
@@ -86,7 +92,11 @@ const MainLayout = () => {
               <BugTwoTone />I like to eat beef
             </Button>
           </Space>
-          <EmployeesPage />
+          <Switch>
+            <Route path='/' exact component={EmployeesPage} />
+            <Route path={pageRoutes.employees} component={EmployeesPage} />
+            <Route path={pageRoutes.users} component={DisplayUsers} />
+          </Switch>
         </Content>
       </Layout>
       <Footer>Feet?</Footer>

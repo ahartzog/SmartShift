@@ -7,6 +7,7 @@ import { DependencyContext } from 'DependencyContext';
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import MainLayout from './layout/MainLayout';
 
@@ -37,7 +38,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <DependencyContext.Provider value={dependencies}>
         <ErrorBoundary errorText='Top level error! Oh no!'>
-          <MainLayout />
+          <Router>
+            <MainLayout />
+          </Router>
           <ReactQueryDevtools />
         </ErrorBoundary>
       </DependencyContext.Provider>
