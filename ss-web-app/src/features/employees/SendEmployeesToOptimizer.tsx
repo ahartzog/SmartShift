@@ -7,9 +7,7 @@ import { Button, notification } from 'antd';
 const SendEmployeesToOptimizer = () => {
   const dependencies = useContext(DependencyContext);
 
-  const employeesData = null;
-
-  const { data: test, isFetching } =
+  const { data: employeesData, isFetching } =
     dependencies.services.apiService.useEmployees();
 
   if (!employeesData) {
