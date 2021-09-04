@@ -15,6 +15,7 @@ import Config from 'lib/config';
 
 const MainLayout = () => {
   console.log('config??', Config);
+  console.log('prcess', process.env);
   const { Header, Content, Footer, Sider } = Layout;
   const { SubMenu } = Menu;
   return (
