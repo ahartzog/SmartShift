@@ -8,6 +8,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Switch, Route, Link } from 'react-router-dom';
+import { PrivateRoute } from 'layout/PrivateRoute';
 import { pageRoutes } from './routes';
 import { Button, Layout, Menu, message, Space } from 'antd';
 import { EmployeesPage } from 'pages/EmployeesPage';
@@ -34,6 +35,7 @@ const MainLayout = () => {
           </Menu.Item>
         </Menu>
       </Header>
+
       <Layout>
         <Sider width={200} className='site-layout-background'>
           <Menu
@@ -93,9 +95,12 @@ const MainLayout = () => {
             </Button>
           </Space>
           <Switch>
-            <Route path='/' exact component={EmployeesPage} />
-            <Route path={pageRoutes.employees} component={EmployeesPage} />
-            <Route path={pageRoutes.users} component={DisplayUsers} />
+            <PrivateRoute path='/' exact component={EmployeesPage} />
+            <PrivateRoute
+              path={pageRoutes.employees}
+              component={EmployeesPage}
+            />
+            <PrivateRoute path={pageRoutes.users} component={DisplayUsers} />
           </Switch>
         </Content>
       </Layout>
