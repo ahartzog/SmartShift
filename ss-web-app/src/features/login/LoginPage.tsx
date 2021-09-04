@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
+import { DependencyContext } from 'DependencyContext';
+
 const LoginPage = () => {
-  const onFinish = (values: any) => {
+  const dependencies = useContext(DependencyContext);
+
+  const { axiosFetch } = dependencies.services.apiService;
+
+  const onFinish = async (values: any) => {
     console.log('Success:', values);
+    const result = await axiosFetch({
+      url: 'auth/login',
+      method: 'POST',
+      data: values,
+    });
+    //If successful, set the JWT token into localstorage
+    window.localStorage.setItem(
+      `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`,
+      result.data.access_token
+    );
+    console.log('result?', result);
+    console.log(
+      'topken??',
+      window.localStorage.getItem(
+        `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
+      )
+    );
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -40,12 +63,12 @@ const LoginPage = () => {
         <Form.Item
           name='remember'
           valuePropName='checked'
-          wrapperCol={{ offset: 8, span: 16 }}
+          wrapperCol={{ offset: 4, span: 16 }}
         >
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
           <Button type='primary' htmlType='submit'>
             Submit
           </Button>

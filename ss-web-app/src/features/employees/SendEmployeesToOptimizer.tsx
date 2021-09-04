@@ -8,7 +8,7 @@ const SendEmployeesToOptimizer = () => {
   const dependencies = useContext(DependencyContext);
 
   const { data: employeesData, isFetching } =
-    dependencies.services.apiService.useEmployees();
+    dependencies.services.apiService.hooks.useEmployees();
 
   if (!employeesData) {
     return <div>Employee data not found</div>;

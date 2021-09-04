@@ -13,7 +13,7 @@ const DisplayEmployees = ({ numberOfClients = null, ...props }: Props) => {
   const dependencies = useContext(DependencyContext);
 
   const { data: employeesData } =
-    dependencies.services.apiService.useEmployees();
+    dependencies.services.apiService.hooks.useEmployees();
 
   if (!employeesData) {
     return <div>Employee data not found</div>;
