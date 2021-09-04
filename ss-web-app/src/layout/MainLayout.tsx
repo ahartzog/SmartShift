@@ -15,12 +15,11 @@ import { EmployeesPage } from 'pages/EmployeesPage';
 import { DisplayUsers } from 'features/users/DisplayUsers';
 import React from 'react';
 import Config from 'lib/config';
-import { LoginPage } from 'features/login/LoginPage';
+import { LoginPage } from 'features/auth/LoginPage';
+import { LogoutPage } from 'features/auth/LogoutPage';
 //import { SendEmployeesToOptimizer } from 'features/employees/SendEmployeesToOptimizer';
 
 const MainLayout = () => {
-  console.log('config??', Config);
-  console.log('prcess', process.env);
   const { Header, Content, Footer, Sider } = Layout;
   const { SubMenu } = Menu;
   return (
@@ -34,6 +33,9 @@ const MainLayout = () => {
             </Menu.Item>
             <Menu.Item key='2'>
               <Link to={pageRoutes.users}>Users</Link>
+            </Menu.Item>
+            <Menu.Item key='3'>
+              <Link to={pageRoutes.logout}>Log Out</Link>
             </Menu.Item>
           </Menu>
         </Header>
@@ -83,6 +85,7 @@ const MainLayout = () => {
         >
           <Switch>
             <Route path={pageRoutes.login} component={LoginPage} />
+            <Route path={pageRoutes.logout} component={LogoutPage} />
             <PrivateRoute path='/' exact component={EmployeesPage} />
             <PrivateRoute
               path={pageRoutes.employees}

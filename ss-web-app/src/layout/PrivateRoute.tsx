@@ -13,7 +13,7 @@ const PrivateRoute = ({ children, exact = false, ...rest }: Props) => {
   const dependencies = useContext(DependencyContext);
 
   const location = useLocation();
-  console.log('location??', location);
+
   const { authStore } = dependencies.stores;
 
   return (

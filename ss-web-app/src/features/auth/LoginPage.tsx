@@ -1,31 +1,45 @@
 import React, { useContext } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
+import { useHistory, useLocation } from 'react-router';
 import { DependencyContext } from 'DependencyContext';
 
 const LoginPage = () => {
   const dependencies = useContext(DependencyContext);
 
+  const history = useHistory();
+  const location = useLocation();
+
   const { axiosFetch } = dependencies.services.apiService;
 
   const onFinish = async (values: any) => {
-    console.log('Success:', values);
     const result = await axiosFetch({
       url: 'auth/login',
       method: 'POST',
       data: values,
     });
+
+    dependencies.services.bugSnagService.leaveBreadcrumb(
+      'API call to log in succeeded'
+    );
     //If successful, set the JWT token into localstorage
     window.localStorage.setItem(
       `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`,
       result.data.access_token
     );
-    console.log('result?', result);
-    console.log(
-      'topken??',
-      window.localStorage.getItem(
-        `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
-      )
-    );
+    // console.log('result?', result);
+    // console.log(
+    //   'topken??',
+    //   window.localStorage.getItem(
+    //     `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
+    //   )
+    // );
+    dependencies.stores.authStore.setIsLoggedIn(true);
+    const locState = location.state as any;
+    if (locState.from) {
+      history.push(locState.from);
+    } else {
+      history.push('/');
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {

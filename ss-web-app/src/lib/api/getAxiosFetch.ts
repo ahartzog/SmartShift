@@ -6,20 +6,34 @@ interface AxiosRequestConfigWithUrlRequired extends AxiosRequestConfig {
   url: string;
 }
 
+//So this service can only really work if the user is signed in...
 const getAxiosFetch = (
   config: typeof Config,
   bugSnagService: BugSnagService
 ) => {
-  //Ok wait I should be getting Config from dependancy?
+  const storedToken = window.localStorage.getItem(
+    `${config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
+  );
+
+  console.log('get Axios Fetch is firing...');
+
   const axiosFetch = async (
     fetchConfig: AxiosRequestConfigWithUrlRequired
   ): Promise<AxiosResponse<any>> => {
+    if (!storedToken) {
+      throw new Error('No auth token found for axios fetch call itself');
+    }
     try {
       bugSnagService.leaveBreadcrumb('Beginning axios fetch for URL', {
         url: fetchConfig.url,
       });
+      const existingHeaders = fetchConfig.headers;
       const result = await axios({
         ...fetchConfig,
+        headers: {
+          ...existingHeaders,
+          Authorization: `Bearer ${storedToken}`,
+        },
         url: config.API_URL + fetchConfig.url,
       });
 

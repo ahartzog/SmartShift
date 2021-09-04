@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 import { useQueryErrorResetBoundary } from 'react-query';
 
