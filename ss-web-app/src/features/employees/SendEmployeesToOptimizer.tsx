@@ -3,12 +3,9 @@ import { DependencyContext } from 'DependencyContext';
 
 import { AimOutlined } from '@ant-design/icons';
 import { Button, notification } from 'antd';
-
+import { useEmployees } from './employeeQueries';
 const SendEmployeesToOptimizer = () => {
-  const dependencies = useContext(DependencyContext);
-
-  const { data: employeesData, isFetching } =
-    dependencies.services.apiService.hooks.useEmployees();
+  const { data: employeesData, isFetching } = useEmployees();
 
   if (!employeesData) {
     return <div>Employee data not found</div>;

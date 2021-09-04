@@ -2,7 +2,7 @@ import { Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { DependencyContext } from 'DependencyContext';
 import React, { useContext } from 'react';
-
+import { useEmployees } from './employeeQueries';
 import { Employee } from 'lib/types';
 
 type Props = {
@@ -10,10 +10,7 @@ type Props = {
 };
 
 const DisplayEmployees = ({ numberOfClients = null, ...props }: Props) => {
-  const dependencies = useContext(DependencyContext);
-
-  const { data: employeesData } =
-    dependencies.services.apiService.hooks.useEmployees();
+  const { data: employeesData } = useEmployees();
 
   if (!employeesData) {
     return <div>Employee data not found</div>;

@@ -5,14 +5,8 @@ import Config from 'lib/config';
 
 export class ApiService {
   axiosFetch: ReturnType<typeof getAxiosFetch>;
-  hooks: {
-    useEmployees: typeof useEmployees;
-  };
 
   constructor(bugSnagService: BugSnagService, config: typeof Config) {
     this.axiosFetch = getAxiosFetch(config, bugSnagService);
-    this.hooks = {
-      useEmployees: useEmployees,
-    };
   }
 }
