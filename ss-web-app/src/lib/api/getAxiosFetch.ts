@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import Config from 'lib/config';
-import { BugSnagService } from 'lib/bugSnagService';
+import type { BugSnagService } from 'lib/bugSnagService';
 
 interface AxiosRequestConfigWithUrlRequired extends AxiosRequestConfig {
   url: string;
@@ -15,15 +15,18 @@ const getAxiosFetch = (
     fetchConfig: AxiosRequestConfigWithUrlRequired
   ): Promise<AxiosResponse<any>> => {
     try {
+      bugSnagService.leaveBreadcrumb('Beginning axios fetch for URL', {
+        url: fetchConfig.url,
+      });
       const result = await axios({
         ...fetchConfig,
         url: config.API_URL + fetchConfig.url,
       });
 
       return result;
-    } catch (e) {
+    } catch (e: any) {
       console.error('Error in axios fetch:', e);
-
+      bugSnagService.notify(e);
       throw e;
     }
   };

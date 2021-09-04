@@ -16,7 +16,7 @@ class Dependencies {
   didFinishSetup: boolean;
 
   constructor() {
-    const bugSnagService = new BugSnagService();
+    const bugSnagService = new BugSnagService(Config);
 
     this.stores = {
       demoStore: new DemoStore(),

@@ -1,7 +1,6 @@
-import { useEmployees } from 'features/employees/employeeQueries';
 import { getAxiosFetch } from 'lib/api/getAxiosFetch';
-import type { BugSnagService } from 'lib/bugSnagService';
-import Config from 'lib/config';
+import { BugSnagService } from 'lib/bugSnagService';
+import type Config from 'lib/config';
 
 export class ApiService {
   axiosFetch: ReturnType<typeof getAxiosFetch>;
