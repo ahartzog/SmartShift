@@ -2,18 +2,16 @@ import React, { useContext } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useHistory, useLocation } from 'react-router';
 import { DependencyContext } from 'DependencyContext';
-
+import axios from 'axios';
 const LoginPage = () => {
   const dependencies = useContext(DependencyContext);
 
   const history = useHistory();
   const location = useLocation();
 
-  const { axiosFetch } = dependencies.services.apiService;
-
   const onFinish = async (values: any) => {
-    const result = await axiosFetch({
-      url: 'auth/login',
+    const result = await axios({
+      url: dependencies.config.API_URL + 'auth/login',
       method: 'POST',
       data: values,
     });
@@ -26,16 +24,10 @@ const LoginPage = () => {
       `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`,
       result.data.access_token
     );
-    // console.log('result?', result);
-    // console.log(
-    //   'topken??',
-    //   window.localStorage.getItem(
-    //     `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
-    //   )
-    // );
+
     dependencies.stores.authStore.setIsLoggedIn(true);
     const locState = location.state as any;
-    if (locState.from) {
+    if (locState.from && locState.from !== '/logout') {
       history.push(locState.from);
     } else {
       history.push('/');

@@ -17,14 +17,14 @@ class Dependencies {
 
   constructor() {
     const bugSnagService = new BugSnagService(Config);
-
+    const authStore = new AuthStore();
     this.stores = {
       demoStore: new DemoStore(),
-      authStore: new AuthStore(),
+      authStore: authStore,
     };
     this.services = {
       bugSnagService: bugSnagService,
-      apiService: new ApiService(bugSnagService, Config),
+      apiService: new ApiService(bugSnagService, Config, authStore),
     };
     this.didFinishSetup = false;
     this.config = Config;
