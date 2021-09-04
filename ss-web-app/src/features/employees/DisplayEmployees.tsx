@@ -15,6 +15,10 @@ const DisplayEmployees = ({ numberOfClients = null, ...props }: Props) => {
   const { data: employeesData } =
     dependencies.services.apiService.useEmployees();
 
+  if (!employeesData) {
+    return <div>Employee data not found</div>;
+  }
+
   // const { data: employeesData } = useEmployees();
 
   const columns: ColumnsType<Employee> = [

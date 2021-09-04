@@ -1,18 +1,15 @@
 import './App.css';
 import 'antd/dist/antd.css';
 
-import { Button } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQueryErrorResetBoundary,
-} from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { ErrorBoundary } from 'components/ErrorBoundary';
 import { Dependencies } from 'Dependencies';
-import MainLayout from './layout/MainLayout';
 import { DependencyContext } from 'DependencyContext';
+import React, { useEffect, useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
+import MainLayout from './layout/MainLayout';
+
 // const BugSnagErrorBoundary =
 //   Bugsnag.getPlugin('react').createErrorBoundary(React);
 
@@ -24,8 +21,6 @@ function App() {
       },
     },
   });
-
-  const { reset } = useQueryErrorResetBoundary();
 
   const [dependencies] = useState<Dependencies>(new Dependencies());
 
@@ -41,19 +36,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <DependencyContext.Provider value={dependencies}>
-        <ErrorBoundary
-          onReset={reset}
-          fallbackRender={({ resetErrorBoundary }) => (
-            <div>
-              There was an error!
-              <Button onClick={() => resetErrorBoundary()}>Try again</Button>
-            </div>
-          )}
-        >
-          {/* <BugSnagErrorBoundary> */}
+        <ErrorBoundary errorText='Top level error! Oh no!'>
           <MainLayout />
           <ReactQueryDevtools />
-          {/* </BugSnagErrorBoundary> */}
         </ErrorBoundary>
       </DependencyContext.Provider>
     </QueryClientProvider>
