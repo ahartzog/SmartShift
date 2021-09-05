@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { Employee } from './employee.entity';
 import { EmployeeService } from './employee.service';
 
@@ -6,7 +6,7 @@ import { EmployeeService } from './employee.service';
 export class EmployeeController {
   constructor(private employeeService: EmployeeService) {}
 
-  @Get('getAllEmployees')
+  @Get()
   async getAllEmployees(): Promise<Employee[]> {
     const employees = await this.employeeService.findAll();
 
@@ -14,9 +14,11 @@ export class EmployeeController {
     return employees;
   }
 
-  @Get()
-  getHello(): string {
-    return 'Hello I am an employee, how can I help you?';
+  //https://restfulapi.net/rest-api-design-tutorial-with-example/
+  @Get(':id')
+  async findOne(@Param() params): Promise<Employee> {
+    const employee = await this.employeeService.findOne(params.id);
+    return employee;
   }
 
   @Get('getGoodbye')

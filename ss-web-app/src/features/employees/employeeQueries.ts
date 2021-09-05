@@ -14,8 +14,6 @@ const useEmployees = () => {
       method: "GET",
     });
 
-    console.log("result?", result);
-
     // const allEmployees = result.data;
 
     // console.log('retval?', allEmployees);
