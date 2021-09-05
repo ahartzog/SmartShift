@@ -21,6 +21,11 @@ export class EmployeeService {
     return this.EmployeesRepository.findOne(id);
   }
 
+  async upsertOne(employee: Employee): Promise<Employee> {
+    const retval = await this.EmployeesRepository.save(employee);
+    return retval;
+  }
+
   async addOneAlek(): Promise<any> {
     const newEmployee: Employee = {
       _id: new ObjectID(),

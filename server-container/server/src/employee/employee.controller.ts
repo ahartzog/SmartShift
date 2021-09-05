@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Patch, Put, Body } from '@nestjs/common';
 import { Employee } from './employee.entity';
 import { EmployeeService } from './employee.service';
 
@@ -16,8 +16,17 @@ export class EmployeeController {
 
   //https://restfulapi.net/rest-api-design-tutorial-with-example/
   @Get(':id')
-  async findOne(@Param() params): Promise<Employee> {
+  async getOneEmployee(@Param() params: { id: string }): Promise<Employee> {
     const employee = await this.employeeService.findOne(params.id);
+    return employee;
+  }
+
+  @Post(':id')
+  async updateOneEmployee(
+    @Param() params,
+    @Body() body: Employee,
+  ): Promise<Employee> {
+    const employee = await this.employeeService.upsertOne(body);
     return employee;
   }
 

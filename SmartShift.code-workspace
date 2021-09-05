@@ -17,6 +17,6 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "typescript.tsdk": "ss-web-app/node_modules/typescript/lib",
-    "cSpell.words": ["Bugsnag", "Sider"]
+    "cSpell.words": ["Bugsnag", "retval", "Sider"]
   }
 }
