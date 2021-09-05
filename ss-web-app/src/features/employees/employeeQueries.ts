@@ -1,27 +1,28 @@
-import Config from 'lib/config';
-
-import { QueryKeys } from 'lib/api/queryKeys';
+import { DependencyContext } from "DependencyContext";
+import { QueryKeys } from "lib/api/queryKeys";
+import { Employee } from "lib/types";
+import React, { useContext } from "react";
+import { useQuery } from "react-query";
 
 //Need to go find the EMPLOYEE type from the server
-import { Employee } from 'lib/types';
-import axios from 'axios';
-import { useQuery } from 'react-query';
-
-const getEmployees = async () => {
-  const result = await axios({
-    url: Config.API_URL + 'employee/getAllEmployees',
-    method: 'get',
-  });
-  // console.log('result?', result);
-
-  const allEmployees: Employee[] = result.data;
-
-  // console.log('retval?', allEmployees);
-
-  return allEmployees;
-};
-
 const useEmployees = () => {
+  const dependencies = useContext(DependencyContext);
+
+  const getEmployees = async () => {
+    const result = await dependencies.services.apiService.axiosFetch<Employee>({
+      url: "employee/getAllEmployees",
+      method: "GET",
+    });
+
+    console.log("result?", result);
+
+    // const allEmployees = result.data;
+
+    // console.log('retval?', allEmployees);
+
+    return result.data;
+  };
+
   return useQuery(QueryKeys.ALL_EMPLOYEES, getEmployees);
 };
 
