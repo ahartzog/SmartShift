@@ -37,12 +37,12 @@ export class EmployeeController {
   }
   //How would we get a certain set of employes by ID or role?
 
-  @Post(':id')
-  async updateOneEmployee(
-    @Param() params: { id: ObjectID },
+  @Post(':_id')
+  async upsertOneEmploee(
+    @Param() params: { _id: ObjectID },
     @Body() body: Employee,
   ): Promise<Employee> {
-    if (params.id !== body._id) {
+    if (params._id !== body._id) {
       throw new Error(
         'Route does not match the body of the user you are trying to update',
       );
