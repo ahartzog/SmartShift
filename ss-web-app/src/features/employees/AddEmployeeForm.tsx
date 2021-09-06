@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { Employee } from "lib/types";
-import React, { useContext } from "react";
-import { ObjectID } from "typeorm";
+import React from "react";
+import type { ObjectID } from "typeorm/";
 import { useAddEmployee } from "./employeeQueries";
 
 const AddEmployeeForm = () => {
@@ -9,7 +9,7 @@ const AddEmployeeForm = () => {
 
   const add = () => {
     const demo: Employee = {
-      _id: new ObjectID(),
+      _id: new Date().toISOString() as unknown as ObjectID,
       firstName: "Alek " + Math.floor(Math.random()) * 9999,
       lastName: "Hartdog",
       emailAddress: "The same...",
