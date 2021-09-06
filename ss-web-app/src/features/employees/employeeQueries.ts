@@ -8,9 +8,21 @@ import { useQuery } from "react-query";
 const useEmployees = () => {
   const dependencies = useContext(DependencyContext);
 
+  const addEmployee = async (employee: Employee) => {
+    const result = await dependencies.services.apiService.axiosFetch<Employee>({
+      url: `employees/${employee._id}`,
+      method: "POST",
+      data: employee,
+    });
+
+    console.log("Add employ ee result?", result);
+
+    return result.data;
+  };
+
   const getEmployees = async () => {
     const result = await dependencies.services.apiService.axiosFetch<Employee>({
-      url: "employee/getAllEmployees",
+      url: "employee/",
       method: "GET",
     });
 
@@ -21,6 +33,7 @@ const useEmployees = () => {
     return result.data;
   };
 
+  //What's the right structure here to be able to get whatever hook we want?
   return useQuery(QueryKeys.ALL_EMPLOYEES, getEmployees);
 };
 

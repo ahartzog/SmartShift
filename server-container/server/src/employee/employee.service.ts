@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { ObjectID } from 'mongodb';
+import { Repository, ObjectID, In } from 'typeorm';
+
 import { Employee } from './Employee.entity';
 
 @Injectable()
@@ -17,8 +17,18 @@ export class EmployeeService {
     return test;
   }
 
-  findOne(id: string): Promise<Employee> {
+  findOne(id: ObjectID): Promise<Employee> {
     return this.EmployeesRepository.findOne(id);
+  }
+
+  //This filler example does not work, and using the In function provided by typeorm does not work
+  //Link to how it SHOULD work --> https://github.com/typeorm/typeorm/issues/1239#issuecomment-431796732
+  async findByIds(ids: string[]): Promise<Employee[]> {
+    const employees = await this.EmployeesRepository.find({
+      _id: '613129d9cbfcf0b0bf181e69',
+    });
+
+    return employees;
   }
 
   async upsertOne(employee: Employee): Promise<Employee> {
