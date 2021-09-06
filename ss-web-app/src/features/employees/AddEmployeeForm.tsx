@@ -9,8 +9,8 @@ const AddEmployeeForm = () => {
 
   const add = () => {
     const demo: Employee = {
-      _id: new Date().toISOString() as unknown as ObjectID,
-      firstName: "Alek " + Math.floor(Math.random()) * 9999,
+      _id: ("fakeId" + Math.floor(Math.random() * 5000)) as unknown as ObjectID,
+      firstName: "Alek " + Math.floor(Math.random() * 5000),
       lastName: "Hartdog",
       emailAddress: "The same...",
     };
