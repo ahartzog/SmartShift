@@ -8,6 +8,7 @@ const LogoutPage = () => {
   const history = useHistory();
 
   useMount(() => {
+    console.log("Mount logout page....");
     dependencies.stores.authStore.setIsLoggedIn(false);
   });
 

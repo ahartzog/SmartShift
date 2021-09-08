@@ -16,16 +16,7 @@ class AuthStore {
     this.#apiService = apiService;
     this.#config = config;
     this.#jwtKey = `${this.#config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`;
-    autorun(() => {
-      console.log("Is logged in changed; autorun");
-      if (this.isLoggedIn === true) {
-        apiService.refreshAxiosFetch();
-      } else {
-        window.localStorage.removeItem(this.#jwtKey);
-        apiService.refreshAxiosFetch();
-      }
-    });
-    console.log("Is logged in??", window.localStorage.getItem(this.#jwtKey));
+    console.log("Constructor is setting...");
     this.setIsLoggedIn(window.localStorage.getItem(this.#jwtKey) !== null);
   }
 
@@ -33,6 +24,11 @@ class AuthStore {
 
   setIsLoggedIn = (isLoggedIn: boolean) => {
     this.isLoggedIn = isLoggedIn;
+    this.#apiService.refreshAxiosFetch();
+    console.log("Set is logged in:", isLoggedIn);
+    if (isLoggedIn === false) {
+      window.localStorage.removeItem(this.#jwtKey);
+    }
   };
 }
 

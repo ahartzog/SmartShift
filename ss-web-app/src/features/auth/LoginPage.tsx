@@ -30,8 +30,16 @@ const LoginPage = observer(() => {
       result.data.access_token
     );
 
+    console.log(
+      "We set it?",
+      window.localStorage.getItem(
+        `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
+      )
+    );
+
     dependencies.stores.authStore.setIsLoggedIn(true);
     const locState = location.state as any;
+    console.log("loc state??", locState);
     if (locState.from && locState.from !== "/logout") {
       history.push(locState.from);
     } else {
