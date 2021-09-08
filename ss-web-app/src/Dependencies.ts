@@ -1,8 +1,8 @@
-import { ApiService } from 'lib/api/apiService';
-import { DemoStore } from 'lib/stores/DemoStore';
-import { AuthStore } from 'lib/stores/AuthStore';
-import { BugSnagService } from 'lib/bugSnagService';
-import Config from 'lib/config';
+import { ApiService } from "lib/api/apiService";
+import { DemoStore } from "lib/stores/DemoStore";
+import { AuthStore } from "lib/stores/AuthStore";
+import { BugSnagService } from "lib/bugSnagService";
+import Config from "lib/config";
 class Dependencies {
   stores: {
     demoStore: DemoStore;
@@ -17,14 +17,16 @@ class Dependencies {
 
   constructor() {
     const bugSnagService = new BugSnagService(Config);
-    const authStore = new AuthStore();
+
+    const apiService = new ApiService(bugSnagService, Config);
+    const authStore = new AuthStore(apiService, Config);
     this.stores = {
       demoStore: new DemoStore(),
       authStore: authStore,
     };
     this.services = {
-      bugSnagService: bugSnagService,
-      apiService: new ApiService(bugSnagService, Config, authStore),
+      bugSnagService,
+      apiService,
     };
     this.didFinishSetup = false;
     this.config = Config;
