@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { DependencyContext } from "DependencyContext";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import { useMount } from "ahooks";
 const LogoutPage = () => {

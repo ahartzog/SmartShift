@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import { DependencyContext } from 'DependencyContext';
+import { AimOutlined } from "@ant-design/icons";
+import { Button, notification } from "antd";
+import React from "react";
 
-import { AimOutlined } from '@ant-design/icons';
-import { Button, notification } from 'antd';
-import { useEmployees } from './employeeQueries';
+import { useEmployees } from "./employeeQueries";
+
 const SendEmployeesToOptimizer = () => {
-  const { data: employeesData, isFetching } = useEmployees();
+  const { data: employeesData } = useEmployees();
 
   if (!employeesData) {
     return <div>Employee data not found</div>;
@@ -22,13 +22,13 @@ const SendEmployeesToOptimizer = () => {
       <Button
         onClick={() =>
           notification.info({
-            message: 'Scheduling request sent',
+            message: "Scheduling request sent",
             description:
-              'It has been sent. We will disable further requests sending',
+              "It has been sent. We will disable further requests sending",
           })
         }
         icon
-        type='primary'
+        type="primary"
       >
         <AimOutlined /> Send to Optimizer
       </Button>

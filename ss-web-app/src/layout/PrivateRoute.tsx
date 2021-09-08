@@ -1,7 +1,7 @@
-import { DependencyContext } from 'DependencyContext';
-import React, { createContext, useContext, useState } from 'react';
-import { Redirect, Route, useLocation } from 'react-router-dom';
-
+import { DependencyContext } from "DependencyContext";
+import React, { useContext } from "react";
+import { Redirect, Route } from "react-router-dom";
+import { observer } from "mobx-react";
 type Props = {
   children?: React.ReactChild;
   path: string;
@@ -9,26 +9,24 @@ type Props = {
   component?: () => React.ReactElement;
 };
 
-const PrivateRoute = ({ children, exact = false, ...rest }: Props) => {
+const PrivateRoute = observer(({ children, exact = false, ...rest }: Props) => {
   const dependencies = useContext(DependencyContext);
 
-  const location = useLocation();
-
   const { authStore } = dependencies.stores;
-
+  const { isLoggedIn } = authStore;
   return (
     <Route
       {...rest}
       render={({ location }) => {
-        if (authStore.isLoggedIn) {
+        if (isLoggedIn) {
           return children;
-        } else if (location.pathname === '/login') {
+        } else if (location.pathname === "/login") {
           return null;
         } else {
           return (
             <Redirect
               to={{
-                pathname: '/login',
+                pathname: "/login",
                 state: { from: location },
               }}
             />
@@ -37,6 +35,6 @@ const PrivateRoute = ({ children, exact = false, ...rest }: Props) => {
       }}
     />
   );
-};
+});
 
 export { PrivateRoute };

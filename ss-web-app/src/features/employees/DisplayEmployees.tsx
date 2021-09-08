@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { DependencyContext } from "DependencyContext";
-import React, { useContext } from "react";
+
+import React from "react";
 import { useEmployees } from "./employeeQueries";
 import { Employee } from "lib/types";
 import { AddEmployeeForm } from "./AddEmployeeForm";
