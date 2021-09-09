@@ -3,7 +3,7 @@
   "workspaces": [
     "ss-web-app",
     "server",
-    "workspace-shared-modules"
+    "modules"
   ],
   "dependencies": {}
 }

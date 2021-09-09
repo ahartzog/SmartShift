@@ -14,7 +14,7 @@
     },
     {
       "name": "modules",
-      "path": "workspace-modules"
+      "path": "modules"
     }
   ],
   "settings": {

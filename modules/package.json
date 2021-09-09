@@ -1,5 +1,5 @@
 {
-  "name": "workspace-shared-modules",
+  "name": "modules",
   "version": "1.0.0",
   "dependencies": {
     "typeorm": "^0.2.37"
