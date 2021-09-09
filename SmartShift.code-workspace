@@ -11,6 +11,10 @@
     {
       "name": "ss-web-app",
       "path": "ss-web-app"
+    },
+    {
+      "name": "modules",
+      "path": "workspace-modules"
     }
   ],
   "settings": {

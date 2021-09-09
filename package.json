@@ -1,3 +1,9 @@
 {
+  "private": true,
+  "workspaces": [
+    "ss-web-app",
+    "server",
+    "workspace-shared-modules"
+  ],
   "dependencies": {}
 }

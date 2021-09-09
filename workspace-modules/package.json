@@ -1,7 +1,7 @@
 {
-  "name": "workspace-modules",
+  "name": "workspace-shared-modules",
   "version": "1.0.0",
   "dependencies": {
-    "cross-env": "5.0.5"
+    "typeorm": "^0.2.37"
   }
 }
