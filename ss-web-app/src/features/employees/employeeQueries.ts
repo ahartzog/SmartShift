@@ -10,6 +10,7 @@ const useEmployees = () => {
   const dependencies = useContext(DependencyContext);
 
   const getEmployees = async () => {
+    console.log("get employees function called...");
     const result = await dependencies.services.apiService.axiosFetch<Employee>({
       url: ControllerNames.EMPLOYEE,
       method: "GET",
@@ -17,12 +18,13 @@ const useEmployees = () => {
 
     // const allEmployees = result.data;
 
-    // console.log('retval?', allEmployees);
+    console.log("retval?", result.data);
 
     return result.data;
   };
 
   //What's the right structure here to be able to get whatever hook we want?
+
   return useQuery(QueryKeys.ALL_EMPLOYEES, getEmployees);
 };
 

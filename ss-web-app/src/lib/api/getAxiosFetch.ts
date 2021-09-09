@@ -15,7 +15,7 @@ const getAxiosFetch = (
     `${config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
   );
 
-  console.log("get Axios Fetch is firing...");
+  bugSnagService.leaveBreadcrumb("Get axios fetch fired");
 
   const axiosFetch = async <T>(
     fetchConfig: AxiosRequestConfigWithUrlRequired

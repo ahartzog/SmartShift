@@ -10,9 +10,9 @@ type Props = {
 };
 
 const DisplayEmployees = ({ numberOfClients = null, ...props }: Props) => {
-  const { data: employeesData } = useEmployees();
+  const { data: employeesData, isFetching, isLoading } = useEmployees();
 
-  if (!employeesData) {
+  if (!employeesData || isFetching || isLoading) {
     return <div>Employee data not found</div>;
   }
 

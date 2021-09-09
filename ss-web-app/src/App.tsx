@@ -29,7 +29,7 @@ function App() {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        suspense: true,
+        suspense: false,
       },
     },
   });

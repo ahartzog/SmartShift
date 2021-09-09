@@ -1,7 +1,7 @@
-import { Button } from 'antd';
-import React from 'react';
-import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
-import { useQueryErrorResetBoundary } from 'react-query';
+import { Button } from "antd";
+import React from "react";
+import { ErrorBoundary as ReactErrorBoundary } from "react-error-boundary";
+import { useQueryErrorResetBoundary } from "react-query";
 
 type Props = {
   children: React.ReactChild | React.ReactChild[];
@@ -13,6 +13,9 @@ const ErrorBoundary = (props: Props) => {
   return (
     <ReactErrorBoundary
       onReset={reset}
+      onError={(e) => {
+        console.log("Error boundary caught: ", e);
+      }}
       fallbackRender={({ resetErrorBoundary }) => (
         <div>
           {props.errorText}

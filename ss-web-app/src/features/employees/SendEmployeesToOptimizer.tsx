@@ -5,9 +5,10 @@ import React from "react";
 import { useEmployees } from "./employeeQueries";
 
 const SendEmployeesToOptimizer = () => {
-  const { data: employeesData } = useEmployees();
+  return null;
+  const { data: employeesData, isFetching } = useEmployees();
 
-  if (!employeesData) {
+  if (!employeesData || isFetching) {
     return <div>Employee data not found</div>;
   }
 
