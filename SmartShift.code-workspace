@@ -6,7 +6,7 @@
     },
     {
       "name": "Server",
-      "path": "./server-container/server"
+      "path": "server"
     },
     {
       "name": "ss-web-app",

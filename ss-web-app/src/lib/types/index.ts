@@ -1,3 +1,3 @@
-import { Employee } from '../../../../server-container/server/src/employee/employee.entity';
+import { Employee } from "../../../../server/src/employee/employee.entity";
 
 export { Employee };

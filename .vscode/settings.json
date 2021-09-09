@@ -1,6 +1,6 @@
 {
   "eslint.workingDirectories": [
-    "./server-container",
+    "./server",
     "./ss-web-app",
     "./workspace-modules"
   ]
