@@ -1,60 +1,52 @@
-import React from 'react';
-import { useEmployees } from 'features/employees/employeeQueries';
-import { Employee } from '../../../../server-container/server/src/employee/employee.entity';
-import { Table } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { Table } from "antd";
+import { ColumnsType } from "antd/es/table";
+
+import React from "react";
+import { useEmployees } from "./employeeQueries";
+import { Employee } from "lib/types";
+import { AddEmployeeForm } from "./AddEmployeeForm";
 type Props = {
   numberOfClients?: number | null;
 };
 
 const DisplayEmployees = ({ numberOfClients = null, ...props }: Props) => {
-  const {
-    status: employeesStatus,
-    data: employeesData,
-    error: employeesError,
-    isFetching: employeesIsFetching,
-  } = useEmployees();
+  const { data: employeesData, isFetching, isLoading } = useEmployees();
 
-  if (employeesIsFetching) {
-    return <div>Loading...</div>;
+  if (!employeesData || isFetching || isLoading) {
+    return <div>Employee data not found</div>;
   }
 
-  if (!employeesData || employeesError) {
-    return <div>Error loading employees data</div>;
-  }
+  // const { data: employeesData } = useEmployees();
 
   const columns: ColumnsType<Employee> = [
     {
-      key: 'firstName',
-      title: 'First Name',
-      dataIndex: 'firstName',
+      key: "_id",
+      title: "Id",
+      dataIndex: "_id",
     },
     {
-      key: 'lastName',
-      title: 'Last Name',
-      dataIndex: 'lastName',
+      key: "firstName",
+      title: "First Name",
+      dataIndex: "firstName",
     },
     {
-      key: 'emailAddress',
-      title: 'Email Address',
-      dataIndex: 'emailAddress',
+      key: "lastName",
+      title: "Last Name",
+      dataIndex: "lastName",
+    },
+    {
+      key: "emailAddress",
+      title: "Email Address",
+      dataIndex: "emailAddress",
     },
   ];
 
   return (
-    <div className='top-display-employees'>
+    <div className="top-display-employees">
       <h1>Display Employees</h1>
       <div>We are displaying: {numberOfClients}</div>
+      <AddEmployeeForm />
       <Table<Employee> columns={columns} dataSource={employeesData} />
-      {/* {employeesData.map((e) => {
-        return (
-          <ul key={e._id.toString()}>
-            <li>FirstName: {e.firstName}</li>
-            <li>LastName: {e.lastName}</li>
-            <li>Email: {e.emailAddress}</li>
-          </ul>
-        );
-      })} */}
     </div>
   );
 };

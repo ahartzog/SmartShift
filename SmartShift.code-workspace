@@ -6,17 +6,21 @@
     },
     {
       "name": "Server",
-      "path": "./server-container/server"
+      "path": "server"
     },
     {
       "name": "ss-web-app",
       "path": "ss-web-app"
+    },
+    {
+      "name": "modules",
+      "path": "modules"
     }
   ],
   "settings": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "typescript.tsdk": "ss-web-app/node_modules/typescript/lib",
-    "cSpell.words": ["Sider"]
+    "cSpell.words": ["Bugsnag", "retval", "Sider", "typeorm"]
   }
 }
