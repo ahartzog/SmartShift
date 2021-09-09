@@ -1,23 +1,23 @@
-import "./App.css";
-import "antd/dist/antd.css";
+import './App.css';
+import 'antd/dist/antd.css';
 
-import { ErrorBoundary } from "components/ErrorBoundary";
-import { Dependencies } from "Dependencies";
-import { DependencyContext } from "DependencyContext";
-import React, { useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { BrowserRouter as Router } from "react-router-dom";
-import { configure } from "mobx";
-import Config from "lib/config";
-import MainLayout from "./layout/MainLayout";
+import { ErrorBoundary } from 'components/ErrorBoundary';
+import { Dependencies } from 'Dependencies';
+import { DependencyContext } from 'DependencyContext';
+import React, { useEffect, useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { configure } from 'mobx';
+import Config from 'lib/config';
+import MainLayout from './layout/MainLayout';
 
 // const BugSnagErrorBoundary =
 //   Bugsnag.getPlugin('react').createErrorBoundary(React);
 
-if (Config.ENV !== "production") {
+if (Config.ENV !== 'production') {
   configure({
-    enforceActions: "always",
+    enforceActions: 'always',
     computedRequiresReaction: true,
     reactionRequiresObservable: true,
     observableRequiresReaction: true,
@@ -43,12 +43,12 @@ function App() {
     if (!dependencies.didFinishSetup) {
       setupDeps();
     }
-  }, [dependencies]);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <DependencyContext.Provider value={dependencies}>
-        <ErrorBoundary errorText="Top level error! Oh no!">
+        <ErrorBoundary errorText='Top level error! Oh no!'>
           <Router>
             <MainLayout />
           </Router>

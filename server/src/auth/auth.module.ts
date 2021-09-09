@@ -4,17 +4,23 @@ import { UserModule } from 'user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtAuthGuard } from './jwt-auth.gard';
 import { JwtStrategy } from './jwt.strategy';
-import { JWT_SECRET_TOKEN } from 'lib/constants';
+import { EnvConfig } from 'lib/constants';
+import { ConfigService, ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     UserModule,
     PassportModule,
-    JwtModule.register({
-      secret: JWT_SECRET_TOKEN,
-      signOptions: {},
+    //ConfigModule,
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService<EnvConfig>) => {
+        return {
+          secret: config.get('JWT_SECRET_TOKEN'),
+          signOptions: {},
+        };
+      },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

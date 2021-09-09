@@ -7,15 +7,25 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
+import * as Joi from 'joi';
+
+const validationSchema = Joi.object({
+  DATABASE_URL: Joi.string(),
+  DATABASE_NAME: Joi.string(),
+  JWT_SECRET_TOKEN: Joi.string(),
+});
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: ['.env'],
+      isGlobal: true,
+      validationSchema,
+    }),
     TypeOrmModule.forRoot({
       type: 'mongodb',
       port: 27017,
-      //host: 'localhost',
-      //username: 'root',
-      //password: 'alllowercasepassword',
       database: 'SmartShift',
       authSource: 'admin',
       url: 'mongodb+srv://root:alllowercasepassword@cluster0.9kvv5.mongodb.net',
