@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Post,
-  Patch,
-  Put,
-  Body,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Query } from '@nestjs/common';
 import { Employee } from './employee.entity';
 import { EmployeeService } from './employee.service';
 import { ObjectID } from 'typeorm';
