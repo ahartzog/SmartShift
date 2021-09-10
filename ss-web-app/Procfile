@@ -1,1 +1,0 @@
-web: yarn workspace ss-web-app start:prod
