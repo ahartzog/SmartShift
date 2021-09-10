@@ -8,6 +8,8 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
+    "postinstall": "npm run prestart:prod",
+    "prestart:prod": "npm run build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "yarn install && nest start",
     "start:dev": "nest start --watch",
@@ -59,6 +61,9 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^3.10.1"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "jest": {
     "moduleFileExtensions": [
