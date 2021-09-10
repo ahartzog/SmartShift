@@ -7,7 +7,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { ConfigModule } from '@nestjs/config';
+
+import { EnvConfig } from 'lib/constants';
+import { ConfigService, ConfigModule } from '@nestjs/config';
+
 import * as Joi from 'joi';
 
 const validationSchema = Joi.object({
@@ -23,19 +26,36 @@ const validationSchema = Joi.object({
       isGlobal: true,
       validationSchema,
     }),
-    TypeOrmModule.forRoot({
-      type: 'mongodb',
-      port: 27017,
-      database: 'SmartShift',
-      authSource: 'admin',
-      url: 'mongodb+srv://root:alllowercasepassword@cluster0.9kvv5.mongodb.net',
-      useNewUrlParser: true,
-      ssl: true,
-      retryAttempts: 3,
-      autoLoadEntities: true,
-      entities: [Employee],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService<EnvConfig>) => ({
+        type: 'mongodb',
+        port: 27017,
+        database: config.get('DATABASE_NAME'),
+        authSource: 'admin',
+        url: config.get('DATABASE_URL'),
+        useNewUrlParser: true,
+        ssl: true,
+        retryAttempts: 3,
+        autoLoadEntities: true,
+        entities: [Employee],
+        synchronize: true,
+      }),
     }),
+    // TypeOrmModule.forRoot({
+    //   type: 'mongodb',
+    //   port: 27017,
+    //   database: 'SmartShift',
+    //   authSource: 'admin',
+    //   url: 'mongodb+srv://root:alllowercasepassword@cluster0.9kvv5.mongodb.net',
+    //   useNewUrlParser: true,
+    //   ssl: true,
+    //   retryAttempts: 3,
+    //   autoLoadEntities: true,
+    //   entities: [Employee],
+    //   synchronize: true,
+    // }),
     EmployeeModule,
     AuthModule,
     UserModule,
