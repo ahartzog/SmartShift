@@ -11,4 +11,5 @@ export interface EnvConfig {
   DATABASE_URL: string;
   DATABASE_NAME: string;
   JWT_SECRET_TOKEN: string;
+  PORT: number;
 }

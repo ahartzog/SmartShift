@@ -17,6 +17,7 @@ const validationSchema = Joi.object({
   DATABASE_URL: Joi.string(),
   DATABASE_NAME: Joi.string(),
   JWT_SECRET_TOKEN: Joi.string(),
+  PORT: Joi.number(),
 });
 
 @Module({

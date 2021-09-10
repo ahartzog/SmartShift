@@ -9,6 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "postinstall": "npm run prestart:prod",
+    "heroku-link": "heroku git:remote -a smartshift-nestjs-starter-serv",
     "prestart:prod": "npm run build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "yarn install && nest start",
