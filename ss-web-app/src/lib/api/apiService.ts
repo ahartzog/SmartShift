@@ -1,6 +1,6 @@
-import { getAxiosFetch } from "lib/api/getAxiosFetch";
-import { BugSnagService } from "lib/bugSnagService";
-import type Config from "lib/config";
+import { getAxiosFetch } from 'lib/api/getAxiosFetch';
+import { BugSnagService } from 'lib/bugSnagService';
+import type Config from 'lib/config';
 
 export class ApiService {
   axiosFetch: ReturnType<typeof getAxiosFetch>;
@@ -13,6 +13,7 @@ export class ApiService {
     this.#bugSnagService = bugSnagService;
   }
 
+  //This is used to ensure our axios service has the JWT token once it's set by the login flow
   refreshAxiosFetch = () => {
     this.axiosFetch = getAxiosFetch(this.#config, this.#bugSnagService);
   };
