@@ -21,6 +21,6 @@ it('adds 1 + 2 to equal 3', () => {
 it('console.logs breadcrumbs since we are in dev mode', () => {
   bugSnagService.leaveBreadcrumb('Hello Breadcrumb World');
   const consoleSpy = jest.spyOn(console, 'log');
-  expect(consoleSpy).toHaveBeenCalledWith('Hello Breadcrumb World');
+  expect(consoleSpy).toHaveBeenCalledWith('Breadcrumb: Hello Breadcrumb World');
   // expect(console.log).toHaveBeenCalledWith('Hello Breadcrumb World');
 });

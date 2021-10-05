@@ -22,6 +22,7 @@ class BugSnagService {
     type?: BreadcrumbType
   ) => {
     if (this.config.ENV === 'development') {
+      //console.log('Hello Breadcrumb World');
       console.log('Breadcrumb:', message);
     }
 
