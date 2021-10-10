@@ -37,12 +37,10 @@ class WebSocketService {
 
     this.#socket = new WebSocket('ws://localhost:8080');
 
-    console.log('socket??', this.#socket);
     this.#socket.onopen = this.onOpen;
-
-    this.#socket.onmessage = this.onMessage;
-    this.#socket.onclose = this.onClose;
-    this.#socket.onerror = this.onError;
+    //this.#socket.onmessage = this.onMessage;
+    //this.#socket.onclose = this.onClose;
+    //this.#socket.onerror = this.onError;
   }
 
   get readyState() {
@@ -62,12 +60,14 @@ class WebSocketService {
   send = (message: string) => {
     console.log('Attempting to send...', message);
 
-    const result = this.#socket.send(
+    const retval = this.#socket.send(
       JSON.stringify({
         event: 'employee',
-        data: 'hello',
+        data: 'this is data from the CLIENT being sent to the server',
       })
     );
+
+    console.log('return value?', retval);
   };
 
   reconnect = () => {
@@ -80,7 +80,15 @@ class WebSocketService {
 
   onOpen = () => {
     console.log('Websocket opened');
-    this.#socket.send('Hello!');
+    this.#socket.send(
+      JSON.stringify({
+        event: 'employee',
+        data: 'WE CONNECTED THE SOCKET, FIRST MESSAGE',
+      })
+    );
+    this.#socket.onmessage = this.onMessage;
+    this.#socket.onclose = this.onClose;
+    this.#socket.onerror = this.onError;
   };
 
   onClose = () => {

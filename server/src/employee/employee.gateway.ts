@@ -14,23 +14,37 @@ export class EmployeeGateway {
   //https://github.com/nestjs/nest/blob/master/sample/16-gateways-ws/src/events/events.gateway.ts
   @WebSocketServer()
   server: Server;
-
+  constructor() {
+    this.interval();
+  }
   // @SubscribeMessage('')
   // listenForMessages(@MessageBody() data: string) {
   //   this.server.sockets.emit('receive_message', data);
   // }
 
   onRecieved() {
-    this.server.on('connection', (ws) => {
+    this.server.on('', (ws) => {
       ws.send('Hi!');
     });
+  }
+  interval() {
+    setInterval(() => {
+      console.log('interval firing...');
+      // this.server.addListener('employee', (ws) => {
+      //   ws.send('GO');
+      // });
+      //this.server.
+      this.server.this.server.emit('employee', (ws) => {
+        ws.send('GO2');
+      });
+    }, 5000);
   }
 
   @SubscribeMessage('employee')
   onEvent(@MessageBody() data: string): WsResponse<unknown> {
     console.log('client?', data);
 
-    return { event: 'employee', data: 'noooo' };
+    return { event: 'employee', data: 'nooooooo' };
 
     // return from([1, 2, 3]).pipe(
     //   map((item) => ({ event: 'events', data: item })),
