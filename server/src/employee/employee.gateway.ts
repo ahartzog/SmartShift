@@ -15,7 +15,7 @@ export class EmployeeGateway {
   @WebSocketServer()
   server: Server;
   constructor() {
-    this.interval();
+    //this.interval();
   }
   // @SubscribeMessage('')
   // listenForMessages(@MessageBody() data: string) {
@@ -34,17 +34,23 @@ export class EmployeeGateway {
       //   ws.send('GO');
       // });
       //this.server.
-      this.server.this.server.emit('employee', (ws) => {
-        ws.send('GO2');
-      });
     }, 5000);
   }
 
   @SubscribeMessage('employee')
   onEvent(@MessageBody() data: string): WsResponse<unknown> {
-    console.log('client?', data);
+    console.log('data in WS?', data);
 
     return { event: 'employee', data: 'nooooooo' };
+
+    // return from([1, 2, 3]).pipe(
+    //   map((item) => ({ event: 'events', data: item })),
+    // );
+  }
+
+  @SubscribeMessage('connected')
+  onConnected(@MessageBody() data: string): WsResponse<unknown> {
+    return { event: 'connected', data: 'Server confirms you are connected' };
 
     // return from([1, 2, 3]).pipe(
     //   map((item) => ({ event: 'events', data: item })),

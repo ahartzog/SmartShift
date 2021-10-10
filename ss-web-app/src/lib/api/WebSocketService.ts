@@ -60,18 +60,18 @@ class WebSocketService {
   send = (message: string) => {
     console.log('Attempting to send...', message);
 
-    const retval = this.#socket.send(
+    this.#socket.send(
       JSON.stringify({
         event: 'employee',
         data: 'this is data from the CLIENT being sent to the server',
       })
     );
-
-    console.log('return value?', retval);
   };
 
   reconnect = () => {
+    console.log('attempting reconnection...');
     this.#socket = new WebSocket('ws://localhost:8080');
+    this.#socket.onopen = this.onOpen;
   };
 
   onMessage = (message: any) => {
@@ -82,7 +82,7 @@ class WebSocketService {
     console.log('Websocket opened');
     this.#socket.send(
       JSON.stringify({
-        event: 'employee',
+        event: 'connected',
         data: 'WE CONNECTED THE SOCKET, FIRST MESSAGE',
       })
     );
