@@ -36,6 +36,7 @@
     "@nestjs/typeorm": "^8.0.2",
     "@nestjs/websockets": "^8.0.11",
     "@types/passport-jwt": "^3.0.6",
+    "@types/ws": "^8.2.0",
     "joi": "^17.4.2",
     "modules": "1.0.0",
     "mongodb": "3.7",

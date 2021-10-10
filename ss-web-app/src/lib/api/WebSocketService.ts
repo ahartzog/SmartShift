@@ -61,14 +61,17 @@ class WebSocketService {
 
   send = (message: string) => {
     console.log('Attempting to send...', message);
-    console.log('ready state?', this.readyState);
 
-    this.#socket.send(
+    const result = this.#socket.send(
       JSON.stringify({
         event: 'employee',
-        message: 'hello',
+        data: 'hello',
       })
     );
+  };
+
+  reconnect = () => {
+    this.#socket = new WebSocket('ws://localhost:8080');
   };
 
   onMessage = (message: any) => {

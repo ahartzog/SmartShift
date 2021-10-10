@@ -12,7 +12,15 @@ const WebhookTest = () => {
     dependencies.services.websocketService.send('cats');
   };
 
-  return <button onClick={sendMessage}>Send WS Message</button>;
+  return (
+    <div>
+      <button onClick={dependencies.services.websocketService.reconnect}>
+        Re-connect WS
+      </button>
+
+      <button onClick={sendMessage}>Send WS Message</button>
+    </div>
+  );
 
   return null;
 };
