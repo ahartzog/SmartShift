@@ -1,24 +1,24 @@
-import { DependencyContext } from "DependencyContext";
-import { QueryKeys, ControllerNames } from "lib/api/queryKeys";
-import { Employee } from "lib/types";
-import { notification } from "antd";
-import { useContext } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { DependencyContext } from 'DependencyContext';
+import { QueryKeys, ControllerNames } from 'lib/api/queryKeys';
+import { Employee } from 'lib/types';
+import { notification } from 'antd';
+import { useContext } from 'react';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 //Need to go find the EMPLOYEE type from the server
 const useEmployees = () => {
   const dependencies = useContext(DependencyContext);
 
   const getEmployees = async () => {
-    console.log("get employees function called...");
+    //console.log("get employees function called...");
     const result = await dependencies.services.apiService.axiosFetch<Employee>({
       url: ControllerNames.EMPLOYEE,
-      method: "GET",
+      method: 'GET',
     });
 
     // const allEmployees = result.data;
 
-    console.log("retval?", result.data);
+    // console.log("retval?", result.data);
 
     return result.data;
   };
@@ -34,11 +34,11 @@ const useAddEmployee = () => {
   const addEmployee = async (employee: Employee) => {
     const result = await dependencies.services.apiService.axiosFetch<Employee>({
       url: `${ControllerNames.EMPLOYEE}${employee._id}`,
-      method: "POST",
+      method: 'POST',
       data: employee,
     });
 
-    console.log("Add employ ee result?", result);
+    console.log('Add employ ee result?', result);
 
     return result.data;
   };
@@ -68,14 +68,14 @@ const useAddEmployee = () => {
         data
       );
       notification.success({
-        message: "Added Employee",
+        message: 'Added Employee',
       });
       //The inelegant way...invalidate these queries
       //queryClient.invalidateQueries(QueryKeys.ALL_EMPLOYEES);
     },
     onError: () => {
       notification.error({
-        message: "Error adding employee",
+        message: 'Error adding employee',
       });
     },
   }).mutate;

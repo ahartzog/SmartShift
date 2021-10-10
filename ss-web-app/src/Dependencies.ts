@@ -1,8 +1,9 @@
-import { ApiService } from "lib/api/apiService";
-import { DemoStore } from "lib/stores/DemoStore";
-import { AuthStore } from "lib/stores/AuthStore";
-import { BugSnagService } from "lib/bugSnagService";
-import Config from "lib/config";
+import { ApiService } from 'lib/api/apiService';
+import { DemoStore } from 'lib/stores/DemoStore';
+import { AuthStore } from 'lib/stores/AuthStore';
+import { BugSnagService } from 'lib/bugSnagService';
+import { WebSocketService } from 'lib/api/WebSocketService';
+import Config from 'lib/config';
 class Dependencies {
   stores: {
     demoStore: DemoStore;
@@ -12,14 +13,16 @@ class Dependencies {
   services: {
     bugSnagService: BugSnagService;
     apiService: ApiService;
+    websocketService: WebSocketService;
   };
   didFinishSetup: boolean;
 
   constructor() {
     const bugSnagService = new BugSnagService(Config);
-
+    const websocketService = new WebSocketService(Config);
     const apiService = new ApiService(bugSnagService, Config);
     const authStore = new AuthStore(apiService, Config);
+
     this.stores = {
       demoStore: new DemoStore(),
       authStore: authStore,
@@ -27,6 +30,7 @@ class Dependencies {
     this.services = {
       bugSnagService,
       apiService,
+      websocketService,
     };
     this.didFinishSetup = false;
     this.config = Config;

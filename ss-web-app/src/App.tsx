@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { configure } from 'mobx';
+import { WebhookTest } from 'components/WebSocketTest';
 import Config from 'lib/config';
 import MainLayout from './layout/MainLayout';
 
@@ -52,6 +53,7 @@ function App() {
           <Router>
             <MainLayout />
           </Router>
+          <WebhookTest />
           <ReactQueryDevtools />
         </ErrorBoundary>
       </DependencyContext.Provider>

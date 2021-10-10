@@ -1,0 +1,1 @@
+export { useDependencies } from './useDependencies';

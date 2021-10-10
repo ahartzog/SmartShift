@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
+import { WsAdapter } from '@nestjs/platform-ws';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +12,7 @@ async function bootstrap() {
     credentials: true,
     //preflightContinue: false,
   });
+  app.useWebSocketAdapter(new WsAdapter(app));
   const envPort = app.get(ConfigService).get('PORT');
   const PORT = envPort || 443;
   await app.listen(PORT);
