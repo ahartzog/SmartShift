@@ -1,4 +1,4 @@
-import { DependencyContext } from 'DependencyContext';
+import { DependencyContext } from 'dependencies/DependencyContext';
 import { QueryKeys, ControllerNames } from 'lib/api/queryKeys';
 import { Employee } from 'lib/types';
 import { notification } from 'antd';

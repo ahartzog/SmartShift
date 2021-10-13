@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
 import { Dependencies } from 'dependencies/Dependencies';
-import { DependencyContext } from 'DependencyContext';
+import { DependencyContext } from 'dependencies/DependencyContext';
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
