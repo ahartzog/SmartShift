@@ -2,7 +2,7 @@ import { ApiService } from 'lib/api/apiService';
 import { DemoStore } from 'lib/stores/DemoStore';
 import { AuthStore } from 'lib/stores/AuthStore';
 import { BugSnagService } from 'lib/bugSnagService';
-import { WebSocketService } from 'lib/api/WebSocketService';
+import { WebSocketService } from 'lib/api/websocket/webSocketService';
 import Config from 'lib/config';
 class Dependencies {
   stores: {
