@@ -1,8 +1,9 @@
 import React from 'react';
 import { DependencyContext } from './DependencyContext';
 import { Dependencies } from './Dependencies';
-const createTestEnv = () => {
-  //
+
+const createTestDeps = (): Dependencies => {
+  return new Dependencies();
 };
 
 interface TestEnvProps {
@@ -17,3 +18,5 @@ const TestEnvProvider = ({ children, dependencies }: TestEnvProps) => {
     </DependencyContext.Provider>
   );
 };
+
+export { TestEnvProvider, createTestDeps };
