@@ -2,15 +2,25 @@ FROM node:14-alpine As development
 
 WORKDIR /usr/src/app
 
-#Copy package.json and package-lock.json
+
+#ROOT
 COPY package*.json .
 COPY yarn.lock .
 
-RUN yarn install
+#MODULES
+COPY modules/package.json ./modules/package.json
+COPY modules/yarn.lock ./modules/yarn.lock
 
-COPY ./server .
+#SERVER
+COPY server/package.json ./server/package.json
+COPY server/yarn.lock ./server/yarn.lock
 
-RUN yarn run build
+RUN yarn install --pure-lockfile --non-interactive
+
+WORKDIR /usr/src/app/server
+
+RUN yarn build
+
 
 FROM node:14-alpine as production
 
@@ -19,13 +29,16 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
 
-COPY package*.json .
-COPY yarn.lock .
+COPY --from=development /usr/src/app/server/package.json /usr/src/app/server/package.json
+COPY --from=development /usr/src/app/server/dist /usr/src/app/server/dist
 
-RUN yarn install --production
+COPY --from=development /usr/src/app/modules/package.json /usr/src/app/modules/package.json
 
-COPY . .
+RUN yarn install --pure-lockfile --non-interactive --production
 
-COPY --from=development /usr/src/app/dist ./dist
+WORKDIR /usr/src/app/server
 
 CMD ["node", "dist/main"]
+
+
+#Yarn workspaces and docker --> https://xfor.medium.com/yarn-workspaces-and-docker-39e30402b69b
