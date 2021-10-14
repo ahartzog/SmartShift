@@ -1,9 +1,14 @@
 import React from 'react';
 import { DependencyContext } from './DependencyContext';
 import { Dependencies } from './Dependencies';
-
 const createTestDeps = (): Dependencies => {
-  return new Dependencies();
+  const deps = new Dependencies();
+  //@ts-ignore
+  deps.config = {
+    LOCAL_STORAGE_AUTH_KEY: '@SmartShift:webapp',
+  };
+
+  return deps;
 };
 
 interface TestEnvProps {
