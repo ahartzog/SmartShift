@@ -1,16 +1,21 @@
-import { AimOutlined } from "@ant-design/icons";
-import { Button, notification } from "antd";
-import React from "react";
+import { AimOutlined } from '@ant-design/icons';
+import { Button, notification } from 'antd';
+import React from 'react';
 
-import { useEmployees } from "./employeeQueries";
+import { useEmployees } from './employeeQueries';
 
 const SendEmployeesToOptimizer = () => {
-  return null;
   const { data: employeesData, isFetching } = useEmployees();
 
   if (!employeesData || isFetching) {
     return <div>Employee data not found</div>;
   }
+
+  const test = [] as any[];
+
+  const no = test.map((k) => {
+    return 'hi';
+  });
 
   return (
     <div>
@@ -23,13 +28,260 @@ const SendEmployeesToOptimizer = () => {
       <Button
         onClick={() =>
           notification.info({
-            message: "Scheduling request sent",
+            message: 'Scheduling request sent',
             description:
-              "It has been sent. We will disable further requests sending",
+              'It has been sent. We will disable further requests sending',
           })
         }
         icon
-        type="primary"
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
+      >
+        <AimOutlined /> Send to Optimizer
+      </Button>
+      <h4>Sending employees to optimizer with the following parameters...</h4>
+      <ul>
+        {/* <li>Count: {employeesData.length}</li> */}
+        <li>Start Date: ...</li>
+        <li>End Date: ...</li>
+      </ul>
+      <Button
+        onClick={() =>
+          notification.info({
+            message: 'Scheduling request sent',
+            description:
+              'It has been sent. We will disable further requests sending',
+          })
+        }
+        icon
+        type='primary'
       >
         <AimOutlined /> Send to Optimizer
       </Button>
