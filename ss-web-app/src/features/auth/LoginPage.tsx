@@ -15,35 +15,39 @@ const LoginPage = observer(() => {
   const location = useLocation();
 
   const onFinish = async (values: any) => {
-    const result = await axios({
-      url: dependencies.config.API_URL + 'auth/login',
-      method: 'POST',
-      data: values,
-    });
+    try {
+      const result = await axios({
+        url: dependencies.config.API_URL + 'auth/login',
+        method: 'POST',
+        data: values,
+      });
 
-    dependencies.services.bugSnagService.leaveBreadcrumb(
-      'API call to log in succeeded'
-    );
-    //If successful, set the JWT token into localstorage
-    window.localStorage.setItem(
-      `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`,
-      result.data.access_token
-    );
+      dependencies.services.bugSnagService.leaveBreadcrumb(
+        'API call to log in succeeded'
+      );
+      //If successful, set the JWT token into localstorage
+      window.localStorage.setItem(
+        `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`,
+        result.data.access_token
+      );
 
-    console.log(
-      'We set it?',
-      window.localStorage.getItem(
-        `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
-      )
-    );
+      console.log(
+        'We set it?',
+        window.localStorage.getItem(
+          `${dependencies.config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
+        )
+      );
 
-    dependencies.stores.authStore.setIsLoggedIn(true);
-    const locState = location.state as any;
-    console.log('loc state??', locState);
-    if (locState.from && locState.from !== '/logout') {
-      history.push(locState.from);
-    } else {
-      history.push('/');
+      dependencies.stores.authStore.setIsLoggedIn(true);
+      const locState = location.state as any;
+      console.log('loc state??', locState);
+      if (locState.from && locState.from !== '/logout') {
+        history.push(locState.from);
+      } else {
+        history.push('/');
+      }
+    } catch (e) {
+      throw new Error('Error signing in');
     }
   };
 

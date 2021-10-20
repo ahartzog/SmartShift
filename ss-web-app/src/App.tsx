@@ -1,5 +1,12 @@
 import './App.css';
 import 'antd/dist/antd.css';
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
 import { Dependencies } from 'dependencies/Dependencies';
@@ -50,11 +57,13 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <DependencyContext.Provider value={dependencies}>
         <ErrorBoundary errorText='Top level error! Oh no!'>
-          <Router>
-            <MainLayout />
-          </Router>
-          <WebhookTest />
-          <ReactQueryDevtools />
+          <RecoilRoot>
+            <Router>
+              <MainLayout />
+            </Router>
+            <WebhookTest />
+            <ReactQueryDevtools />
+          </RecoilRoot>
         </ErrorBoundary>
       </DependencyContext.Provider>
     </QueryClientProvider>

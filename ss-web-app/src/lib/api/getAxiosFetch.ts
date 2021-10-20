@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import Config from "lib/config";
-import type { BugSnagService } from "lib/bugSnagService";
-import { isArray } from "lodash";
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import Config from 'lib/config';
+import type { BugSnagService } from 'lib/bugSnagService';
+import { isArray } from 'lodash';
 interface AxiosRequestConfigWithUrlRequired extends AxiosRequestConfig {
   url: string;
 }
@@ -15,16 +15,16 @@ const getAxiosFetch = (
     `${config.LOCAL_STORAGE_AUTH_KEY}-jwt-key`
   );
 
-  bugSnagService.leaveBreadcrumb("Get axios fetch fired");
+  bugSnagService.leaveBreadcrumb('Get axios fetch fired');
 
   const axiosFetch = async <T>(
     fetchConfig: AxiosRequestConfigWithUrlRequired
   ): Promise<AxiosResponse<T[]>> => {
     if (!storedToken) {
-      throw new Error("No auth token found for axios fetch call itself");
+      throw new Error('No auth token found for axios fetch call itself');
     }
     try {
-      bugSnagService.leaveBreadcrumb("Beginning axios fetch for URL", {
+      bugSnagService.leaveBreadcrumb('Beginning axios fetch for URL', {
         url: fetchConfig.url,
       });
       const existingHeaders = fetchConfig.headers;
@@ -44,7 +44,7 @@ const getAxiosFetch = (
 
       return result;
     } catch (e: any) {
-      console.error("Error in axios fetch:", e);
+      console.error('Error in axios fetch:', e);
       bugSnagService.notify(e);
       throw e;
     }

@@ -27,6 +27,7 @@
     "react-scripts": "4.0.3",
     "react-spinkit": "^3.0.0",
     "react-use-websocket": "^2.8.0",
+    "recoil": "^0.4.1",
     "serve": "^12.0.1",
     "web-vitals": "^1.0.1"
   },
@@ -45,8 +46,8 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.8",
     "@types/react-spinkit": "^3.0.7",
-    "jest-localstorage-mock": "^2.4.18",
-    "eslint-plugin-sonarjs": "0.10.0"
+    "eslint-plugin-sonarjs": "0.10.0",
+    "jest-localstorage-mock": "^2.4.18"
   },
   "scripts": {
     "start": "yarn install && react-scripts start",
@@ -54,16 +55,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "plugins": [
-      "sonarjs"
-    ],
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:sonarjs/recommended"
-    ]
   },
   "browserslist": {
     "production": [
