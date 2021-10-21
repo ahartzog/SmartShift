@@ -13,3 +13,9 @@ class Choice(models.Model):
     votes = models.IntegerField(default = 0)
     def __str__(self):
         return self.choice_text
+
+
+class AleksClass():
+    name = "Alek"
+    def getName(self):
+        return name
