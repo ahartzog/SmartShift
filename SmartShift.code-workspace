@@ -15,6 +15,14 @@
     {
       "name": "modules",
       "path": "modules"
+    },
+    {
+      "name": "python-server",
+      "path": "python-server"
+    },
+    {
+      "name": "go-server",
+      "path": "go-server"
     }
   ],
   "settings": {
