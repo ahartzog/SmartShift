@@ -12,6 +12,7 @@ type POI = {
   name: string;
   address: string;
   center: [number, number] | null;
+  markerColor?: string;
 };
 
 const MapBox = () => {
@@ -27,16 +28,24 @@ const MapBox = () => {
       name: 'Our House',
       address: '9212 NW 17th place, Gainesville FL 32606',
       center: null,
+      markerColor: 'green',
     },
     {
       name: 'Grandma Lisa',
       address: '3224 Pine Rd, Orange Park, FL',
       center: null,
+      markerColor: '#C73737',
     },
     {
       name: 'Grandpa John',
       address: '2410 Edward Rd, West Palm Beach FL 33410',
       center: null,
+    },
+    {
+      name: 'Cousin Ryker',
+      address: '3568 XANTHIA ST DENVER CO 80238-3365',
+      center: null,
+      markerColor: 'blue',
     },
   ]);
 
@@ -97,8 +106,13 @@ const MapBox = () => {
       const pois = placesOfInterest.map(async (place) => {
         //https://docs.mapbox.com/mapbox-gl-js/example/add-a-marker/
         const center = await getGeoDataForAddress(place.address);
-        new mapboxgl.Marker().setLngLat(center).addTo(mapInfo);
+        new mapboxgl.Marker({
+          color: place.markerColor ? place.markerColor : 'purple',
+        })
+          .setLngLat(center)
+          .addTo(mapInfo);
         place.center = center;
+
         return place;
       });
     };
@@ -127,8 +141,9 @@ const MapBox = () => {
               <button
                 onClick={() => {
                   if (pl.center) {
-                    setLat(pl.center[0]);
+                    //setLat(pl.center[0]);
                     setLng(pl.center[1]);
+                    mapInfo?.setCenter(pl.center);
                   } else {
                     window.alert('No address known for this location');
                   }
