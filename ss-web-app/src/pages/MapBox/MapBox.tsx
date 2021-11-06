@@ -1,40 +1,39 @@
 import mapboxgl, { Map } from 'mapbox-gl';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import axios from 'axios';
+import { Alert } from 'antd';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import './mapboxStyle.css';
 
-require('./mapboxStyle.css');
+const ACCESS_TOKEN =
+  'pk.eyJ1IjoiYWhhcnR6b2ciLCJhIjoiY2t2bGE1b3k5YmZmcDJvb2ZlcWtiMzFmNCJ9.2s1FQFhj4lh359k__QOZTw';
 const MapBox = () => {
-  const map = useRef<Map>(null);
-  const [mapInfo, setMapInfo] = useState(null);
+  const mapContainer = useRef(null);
+  const [mapInfo, setMapInfo] = useState<Map>();
 
-  const mapRef = useCallback((mapNode) => {
-    // console.log(catImageNode);
-    setMapInfo(mapNode);
-    // setCatInfo(catImageNode?.getBoundingClientRect());
-  }, []);
+  const [lng, setLng] = useState(-82.439427);
+  const [lat, setLat] = useState(29.668267);
+  const [zoom, setZoom] = useState(9);
 
   useEffect(() => {
-    console.log('Effect!');
-    if (map.current) {
+    //Set the ref into state once so we can ensure it's usable
+    if (mapInfo) {
       return;
     }
     const hi = new mapboxgl.Map({
       //@ts-ignore
-      container: 'map',
+      container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      accessToken:
-        'pk.eyJ1IjoiYWhhcnR6b2ciLCJhIjoiY2t2bGE1b3k5YmZmcDJvb2ZlcWtiMzFmNCJ9.2s1FQFhj4lh359k__QOZTw',
+      accessToken: ACCESS_TOKEN,
+      center: [lng, lat],
+      zoom: zoom,
     });
-
+    console.log('hi?', hi);
     //@ts-ignore
-    map.current = hi;
+    setMapInfo(hi);
   });
 
   console.log('render!');
-
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
 
   const round = (num: number) => {
     return Math.round(num * 1e2) / 1e2;
@@ -58,34 +57,47 @@ const MapBox = () => {
   const getGeoDataForAddress = async (searchString: string) => {
     const homeGeo = await axios({
       method: 'get',
-      url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchString}.json`,
+      url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchString}.json?access_token=${ACCESS_TOKEN}`,
     });
 
-    console.log('home go?', homeGeo.data);
-    // new mapboxgl.Marker({
-    //   color: 'red',
-
-    // }).setLngLat
+    if (homeGeo.data.features.length > 0) {
+      console.log('Feature?', homeGeo.data.features[0]);
+      return homeGeo.data.features[0].center;
+    }
+    window.alert('No location found for ' + searchString);
   };
 
   useEffect(() => {
-    console.log('Map info?', mapInfo);
-    //mapInfo.current!.addControl(new mapboxgl.NavigationControl());
+    console.log('Map info effect is running, this should only happen once');
+    if (!mapInfo) {
+      return;
+    }
 
-    // props.mapBoxRef.current!.on('move', () => {
-    //   setLng(round(props.mapBoxRef.current!.getCenter().lng));
-    //   setLat(round(props.mapBoxRef.current!.getCenter().lat));
-    //   setZoom(round(props.mapBoxRef.current!.getZoom()));
-    // });
+    //Ok, the ref is set, now we can actually do stuff
+
+    mapInfo.addControl(new mapboxgl.NavigationControl());
+
+    mapInfo.on('move', () => {
+      setLng(round(mapInfo.getCenter().lng));
+      setLat(round(mapInfo.getCenter().lat));
+      setZoom(round(mapInfo.getZoom()));
+    });
+
+    const setPlacesOfInterest = async () => {
+      placesOfInterest.forEach(async (place) => {
+        //https://docs.mapbox.com/mapbox-gl-js/example/add-a-marker/
+        const center = await getGeoDataForAddress(place.address);
+        new mapboxgl.Marker().setLngLat(center).addTo(mapInfo);
+      });
+    };
+
+    setPlacesOfInterest();
   }, [mapInfo]);
 
-  useEffect(() => {
-    console.log('running...');
-    placesOfInterest.forEach((place) => {
-      //https://docs.mapbox.com/mapbox-gl-js/example/add-a-marker/
-      getGeoDataForAddress(place.address);
-    });
-  });
+  // useEffect(() => {
+  //   console.log('running...');
+
+  // });
 
   return (
     <div>
@@ -95,7 +107,7 @@ const MapBox = () => {
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
       {/* @ts-ignore */}
-      <div id='map' ref={mapRef} className='map-container' />
+      <div ref={mapContainer} className='map-container' />
       <div>
         <h3>Find Places</h3>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
