@@ -1,23 +1,18 @@
 import './App.css';
 import 'antd/dist/antd.css';
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from 'recoil';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
+import { WebhookTest } from 'components/WebSocketTest';
 import { Dependencies } from 'dependencies/Dependencies';
 import { DependencyContext } from 'dependencies/DependencyContext';
+import Config from 'lib/config';
+import { configure } from 'mobx';
 import React, { useEffect, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { configure } from 'mobx';
-import { WebhookTest } from 'components/WebSocketTest';
-import Config from 'lib/config';
+import { RecoilRoot } from 'recoil';
+
 import MainLayout from './layout/MainLayout';
 
 // const BugSnagErrorBoundary =

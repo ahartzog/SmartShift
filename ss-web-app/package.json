@@ -9,6 +9,7 @@
     "@ant-design/icons": "^4.6.4",
     "@bugsnag/js": "^7.11.0",
     "@bugsnag/plugin-react": "^7.11.0",
+    "@types/mapbox-gl": "^2.4.2",
     "ahooks": "^2.10.9",
     "antd": "^4.16.13",
     "axios": "^0.21.1",

@@ -33,7 +33,7 @@ const MainLayout = () => {
             <Menu.Item key='1'>
               <Link to={pageRoutes.employees}>Employees</Link>
             </Menu.Item>
-            <Menu.Item key='1'>
+            <Menu.Item key='4'>
               <Link to={pageRoutes.mapBox}>MapBox</Link>
             </Menu.Item>
             <Menu.Item key='2'>

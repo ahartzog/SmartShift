@@ -75,7 +75,7 @@ class WebSocketService {
   };
 
   onMessage = (message: any) => {
-    console.log('message recieved', message);
+    //console.log('message recieved', message);
   };
 
   onOpen = () => {
