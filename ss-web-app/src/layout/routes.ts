@@ -3,4 +3,6 @@ export enum pageRoutes {
   users = '/users',
   login = '/login',
   logout = '/logout',
+  cesium = '/cesium',
+  mapBox = '/mapBox',
 }

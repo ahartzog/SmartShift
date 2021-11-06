@@ -17,6 +17,8 @@ import React from 'react';
 import { GlobalModal } from './GlobalModal';
 import { LoginPage } from 'features/auth/LoginPage';
 import { LogoutPage } from 'features/auth/LogoutPage';
+import { CesiumTop } from 'pages/cesium/CesiumTop';
+import { MapBox } from 'pages/MapBox/MapBox';
 //import { SendEmployeesToOptimizer } from 'features/employees/SendEmployeesToOptimizer';
 
 const MainLayout = () => {
@@ -30,6 +32,9 @@ const MainLayout = () => {
           <Menu theme='dark' mode='horizontal' defaultSelectedKeys={['2']}>
             <Menu.Item key='1'>
               <Link to={pageRoutes.employees}>Employees</Link>
+            </Menu.Item>
+            <Menu.Item key='1'>
+              <Link to={pageRoutes.mapBox}>MapBox</Link>
             </Menu.Item>
             <Menu.Item key='2'>
               <Link to={pageRoutes.users}>Users</Link>
@@ -91,6 +96,8 @@ const MainLayout = () => {
               path={pageRoutes.employees}
               component={EmployeesPage}
             />
+            {/* <PrivateRoute path={pageRoutes.cesium} component={CesiumTop} /> */}
+            <PrivateRoute path={pageRoutes.mapBox} component={MapBox} />
             <PrivateRoute path={pageRoutes.users} component={DisplayUsers} />
           </Switch>
         </Content>
