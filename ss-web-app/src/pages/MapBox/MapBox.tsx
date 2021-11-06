@@ -10,7 +10,7 @@ const MapBox = () => {
 
   const [pointsOfInterest, setPointsOfInterest] = React.useState(null);
   const mapContainer = useRef(null);
-  const map = useRef(null);
+  const map = useRef<Map>(null);
   const [lng, setLng] = useState(-70.9);
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
@@ -38,6 +38,19 @@ const MapBox = () => {
       accessToken:
         'pk.eyJ1IjoiYWhhcnR6b2ciLCJhIjoiY2t2bGE1b3k5YmZmcDJvb2ZlcWtiMzFmNCJ9.2s1FQFhj4lh359k__QOZTw',
       zoom: zoom,
+    });
+  });
+
+  const round = (num: number) => {
+    return Math.round(num * 1e2) / 1e2;
+  };
+
+  useEffect(() => {
+    if (!map.current) return; // wait for map to initialize
+    map.current.on('move', () => {
+      setLng(round(map.current!.getCenter().lng));
+      setLat(round(map.current!.getCenter().lat));
+      setZoom(round(map.current!.getZoom()));
     });
   });
 
