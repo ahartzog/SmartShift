@@ -7,6 +7,13 @@ import './mapboxStyle.css';
 
 const ACCESS_TOKEN =
   'pk.eyJ1IjoiYWhhcnR6b2ciLCJhIjoiY2t2bGE1b3k5YmZmcDJvb2ZlcWtiMzFmNCJ9.2s1FQFhj4lh359k__QOZTw';
+
+type POI = {
+  name: string;
+  address: string;
+  center: [number, number] | null;
+};
+
 const MapBox = () => {
   const mapContainer = useRef(null);
   const [mapInfo, setMapInfo] = useState<Map>();
@@ -14,6 +21,24 @@ const MapBox = () => {
   const [lng, setLng] = useState(-82.439427);
   const [lat, setLat] = useState(29.668267);
   const [zoom, setZoom] = useState(9);
+
+  const [placesOfInterest, setPlacesOfInterest] = useState<POI[]>([
+    {
+      name: 'Our House',
+      address: '9212 NW 17th place, Gainesville FL 32606',
+      center: null,
+    },
+    {
+      name: 'Grandma Lisa',
+      address: '3224 Pine Rd, Orange Park, FL',
+      center: null,
+    },
+    {
+      name: 'Grandpa John',
+      address: '2410 Edward Rd, West Palm Beach FL 33410',
+      center: null,
+    },
+  ]);
 
   useEffect(() => {
     //Set the ref into state once so we can ensure it's usable
@@ -38,21 +63,6 @@ const MapBox = () => {
   const round = (num: number) => {
     return Math.round(num * 1e2) / 1e2;
   };
-
-  const placesOfInterest = [
-    {
-      name: 'Our House',
-      address: '9212 NW 17th place, Gainesville FL 32606',
-    },
-    {
-      name: 'Grandma Lisa',
-      address: '3224 Pine Rd, Orange Park, FL',
-    },
-    {
-      name: 'Grandpa John',
-      address: '2410 Edward Rd, West Palm Beach FL 33410',
-    },
-  ];
 
   const getGeoDataForAddress = async (searchString: string) => {
     const homeGeo = await axios({
@@ -84,10 +94,12 @@ const MapBox = () => {
     });
 
     const setPlacesOfInterest = async () => {
-      placesOfInterest.forEach(async (place) => {
+      const pois = placesOfInterest.map(async (place) => {
         //https://docs.mapbox.com/mapbox-gl-js/example/add-a-marker/
         const center = await getGeoDataForAddress(place.address);
         new mapboxgl.Marker().setLngLat(center).addTo(mapInfo);
+        place.center = center;
+        return place;
       });
     };
 
@@ -102,7 +114,6 @@ const MapBox = () => {
   return (
     <div>
       <h1>Map, Map, Map!</h1>
-
       <div className='sidebar'>
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
@@ -112,7 +123,21 @@ const MapBox = () => {
         <h3>Find Places</h3>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {placesOfInterest.map((pl) => {
-            return <button key={pl.name}>{pl.name}</button>;
+            return (
+              <button
+                onClick={() => {
+                  if (pl.center) {
+                    setLat(pl.center[0]);
+                    setLng(pl.center[1]);
+                  } else {
+                    window.alert('No address known for this location');
+                  }
+                }}
+                key={pl.name}
+              >
+                {pl.name}
+              </button>
+            );
           })}
         </div>
       </div>
