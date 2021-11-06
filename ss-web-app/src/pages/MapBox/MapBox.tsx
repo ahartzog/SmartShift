@@ -9,6 +9,7 @@ const MapBox = () => {
   const map = useRef<Map>(null);
 
   useEffect(() => {
+    console.log('Effect!');
     if (map.current) {
       return;
     }
@@ -24,9 +25,7 @@ const MapBox = () => {
     map.current = hi;
   });
 
-  if (!map || !map.current) {
-    return <div id='map' className='map-container' />;
-  }
+  console.log('render!');
 
   return (
     <MapBoxControls mapBoxRef={map}>
